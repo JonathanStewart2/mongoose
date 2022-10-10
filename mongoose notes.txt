@@ -1,2 +1,17 @@
 Mongoose - connects our app to mongo.
 Schema -> enforces structure of a collection
+
+
+install Mongoose
+connect to in
+set out Schema
+insert where arrays were used
+
+router.get("/getAllDucks", (req,res) => duckModel.find({})
+.then(results => res.send(results))
+.catch(err => next(err)));
+
+FOR DELETING
+duckModel.deleteOne({id})
+ourduckModel.findByIdAndDelete(id).then(result => res.send(result)).catch(err => next(err));
+or duckModel.findByIdAndUpdate(id).then(result => res.send(result)).catch(err => next(err));
