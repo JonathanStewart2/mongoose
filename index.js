@@ -3,18 +3,12 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const { nextTick } = require("process");
 const Schema = mongoose.Schema;
-// mongoose.connect('mongodb://localhost:27017/example',
-//     { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/movies_db',
+    { useNewUrlParser: true });
 
-mongoose.connect('mongodb://localhost:4417/example', { useNewUrlParser: true },
-    function (err) {
-         if (err) {
-             console.log(`Error: ${err}`);
-        } else {
-            console.log("Connection ready");
-        }
-    });
+
 
 //Create a 'movies' schema. Include fields such as title, 
 //description, date released, etc.
@@ -30,7 +24,7 @@ const actorSchema = new Schema({
 })
 
 
-const reviewsSchema = new Schema({
+const reviewSchema = new Schema({
     filmTitle: {
         type: String,
         required: true,
@@ -69,11 +63,18 @@ const movieSchema = new Schema({
         required: false
     },
     actors: [actorSchema],
-    reviews: [reviewsSchema]
+    reviews: [reviewSchema]
 })
 
+const reviewModel = mongoose.model("reviews", reviewSchema);
+const actorModel = mongoose.model("actors", actorSchema);
+const movieModel = mongoose.model("movies", movieSchema);
 
-
+module.exports = {
+    reviewModel,
+    actorModel,
+    movieModel
+};
 
 
 
@@ -82,3 +83,16 @@ const movieSchema = new Schema({
 const server = app.listen(4417, () => {
     console.log(`Server started succesfully on port ${server.address().port}`);
 })
+
+
+
+
+// getting files
+// router.get("/getAllDucks", (req,res) => duckModel.find({})
+// .then(results => res.send(results))
+// .catch(err => nextTick(err)));
+
+// create
+// duckModel.create(req.body)
+// .then(results => res.status(201).send(results))
+// .catch(err => nextTick(err)));

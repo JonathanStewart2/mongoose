@@ -1,0 +1,2 @@
+Mongoose - connects our app to mongo.
+Schema -> enforces structure of a collection

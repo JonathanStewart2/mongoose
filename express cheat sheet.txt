@@ -1,0 +1,17 @@
+// STARTING NEW NODE/EXPRESS PACKAGE
+
+npm init -y
+npm install express
+npm i body-parser
+npm i nodemon
+
+JS FILE
+const express = require('express');
+const app = express();
+
+const server = app.listen(4417, () => {
+    console.log(`Server started succesfully on port ${server.address().port}`);
+})
+
+PACKAGE.JSON FILE
+"start": "nodemon index.js"
