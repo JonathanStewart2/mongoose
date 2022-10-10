@@ -12,7 +12,7 @@ const actorSchema = new Schema({
     _id: Schema.Types.ObjectId,
     name: {
         type: String,
-        required: true,
+        require: true,
         minlength: 2
     },
     movies: [{ type: Schema.Types.ObjectId, ref: 'movies'}]
@@ -22,22 +22,22 @@ const actorSchema = new Schema({
 const reviewSchema = new Schema({
     filmTitle: {
         type: String,
-        required: true,
+        require: true,
         maxlength: 255
     },
     reviewerName: {
         type: String,
-        required: true,
+        require: true,
         maxlength: 255,
         minlength: 2
     },
     reviewDate: {
         type: Date,
-        required: true
+        require: true
     },
     reviewBody: {
         type: String,
-        required: true
+        require: true
     }
 })
 
@@ -46,17 +46,17 @@ const movieSchema = new Schema({
     _id: Schema.Types.ObjectId,
     title: {
         type: String,
-        required: true,
+        require: true,
         minlength: 2
     },
     description: {
         type: String,
-        required: false,
+        require: false,
         maxlength: 255
     },
     releaseDate: {
         type: Date,
-        required: false
+        require: false
     },
     actors: [{ type: Schema.Types.ObjectId, ref: 'actors' }],
     reviews: [reviewSchema]

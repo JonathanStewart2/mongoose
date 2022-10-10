@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 const routes = require("./route.js");
 const bodyParser = require('body-parser')
-const pokemonSchema = require("./movies.js");
+
 
 const logger = (req,res,next) => {
     console.log(`Request received at: ${new Date()}`);
@@ -12,9 +12,6 @@ const logger = (req,res,next) => {
 }
 
 app.use(routes, logger);
-
-
-
 
 
 const server = app.listen(4417, () => {

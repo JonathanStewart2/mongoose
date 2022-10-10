@@ -33,6 +33,37 @@ router.get('/findActor/:id', (req,res,next) => {
     .catch(err => next(err))
 })
 
+router.post('/addMovie', (req,res,next) => {
+    //if (!req.body.title) return next({ status: 400, message: "Invalid body"});
+    movieModel.init();
+    const movie = new movieModel({
+        title: req.body.title,
+        description: req.body.description,
+        releaseDate: req.body.releaseDate,
+        actors: req.body.actors     
+        })
+        movie.save().then((data)=>{
+            console.log('save data: ',data)
+        })
+    // movieModel.create(req.body)
+    // .then(results => res.status(201).send(results))
+    // .catch(err => next(err))
+});
+
+router.post('/addActor', (req,res,next) => {
+    //if (!req.body.name) return next({ status: 400, message: "Invalid body"});
+    console.log(req.body.name);
+    actorModel.create(req.body)
+    .then(results => res.status(201).send(results))
+    .catch(err => next(err))
+});
+    
+
+
+// TO BE CHANGED
+
+
+
 router.delete('/delete/:id', (req, res) => {
     const id = req.params.id;
     console.log(`Deleting pokemon with ID: ${id}`);
@@ -41,19 +72,6 @@ router.delete('/delete/:id', (req, res) => {
     res.send(`${removed} was deleted!`);
 })
 
-
-//request handler which creates a new name in the array by sending
-// JSON object in the request body
-router.post('/addPokemon', (req,res,next) => {
-    if (!req.body.name) return next({
-        status: 404,
-        message: "Invalid pokemon entry"
-    });
-    const newPokemon = req.body.name;
-    console.log(`Request received for ${newPokemon} to be added`);
-    pokemon.push(newPokemon);
-    res.send(`Success, ${newPokemon} added!`);
-})
 
 
 router.put('/replace/:id', (req, res) => {
