@@ -3,7 +3,6 @@
 const { movieModel } = require("./movies.js");
 const { actorModel } = require("./movies.js");
 const { reviewModel } = require("./movies.js")
-
 const router = require("express").Router()
 
 
@@ -68,7 +67,6 @@ router.patch("/updateActor/:id", async (req,res,next) => {
     }
 })
 
-// doesnt work as havent set _id to objectId
 router.patch("/updateMovies/:id", async (req,res,next) => {
     try {
         await movieModel.findByIdAndUpdate(req.params.id, req.body)
@@ -79,8 +77,6 @@ router.patch("/updateMovies/:id", async (req,res,next) => {
         return next(err);
     }
 })
-//63453411f92b3fd99e6b80c5 - review ID
-// 634525137fe3e3a4959def8b -inception ID
 
 router.post("/createReview", async (req,res,next) => {
     try { 
@@ -90,18 +86,6 @@ router.post("/createReview", async (req,res,next) => {
         return next(err);
     }   
 })
-
-//TODO: GET ASYNC WORKING
-// router.patch("/updateActor/:id", async (req,res,next) => {
-//     try {
-//         await actorModel.findByIdAndUpdate(req.params.id, req.query)
-//         const newModel = await actorModel.findById(req.params.id);
-//         console.log(newModel);
-//         res.send(newModel);
-//     } catch(err) {
-//         return next(err);
-//     }
-// })
 
 
 module.exports = router;

@@ -20,6 +20,7 @@ const actorSchema = new Schema({
 
 
 const reviewSchema = new Schema({
+    reference: [{ type: Schema.Types.ObjectId, ref: 'movies'}],
     filmTitle: {
         type: String,
         require: true,
@@ -59,7 +60,7 @@ const movieSchema = new Schema({
         require: false
     },
     actors: [{ type: Schema.Types.ObjectId, ref: 'actors' }],
-    reviews: [reviewSchema]
+    reviews: [{ type: Schema.Types.ObjectId, ref: 'reviews' }]
 })
 
 const reviewModel = mongoose.model("reviews", reviewSchema);
@@ -71,9 +72,3 @@ module.exports = {
     actorModel,
     movieModel
 };
-
-
-
-
-//   634431c055c391bc4f4a98b3 _ leo Di Caprio
-//   634431f255c391bc4f4a98b6 - Wolf of Wall St

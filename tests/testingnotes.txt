@@ -1,0 +1,31 @@
+Testing (meets requirements) ->
+    - does it work (functional)
+    - how  easy is it to use   \
+    - scalability               - non-functional
+    - performance              /
+
+
+    Mocha - test runner
+    chai - checks it works
+
+
+-----
+    module.exports = {
+        sum: (a,b) +> a+b,
+        subtract: (a,b) => a-b,
+        multiply: (a,b) => a*b,
+        divide (a,b) => a/b,
+    }
+----
+in a name.test.js file:
+
+const {sum} = require("../maths");
+const { expect } = chai;
+describe("maths tests", () => {         // set of tests
+    it("should equal 2" () => {         //single test
+        expect(sum(1,1)).to.equal(2);
+    })
+    it("should fail", () => {
+        expect(sum(1,1)).to.equal(3);
+    })
+})
