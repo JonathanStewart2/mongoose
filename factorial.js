@@ -20,6 +20,8 @@ const factorial = (n) => {
 
 module.exports = factorial;
 
+
+
 // const recursiveFactorial = (n, s) => {
 //     if (n%2 !== 0){
 //         return "None"
