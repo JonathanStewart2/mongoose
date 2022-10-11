@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const routes = require("./route.js");
 const bodyParser = require('body-parser')
+app.use(bodyParser.json());
 
 
 const logger = (req,res,next) => {
@@ -14,19 +15,16 @@ const logger = (req,res,next) => {
 app.use(routes, logger);
 
 
+// error handling
+app.use((err,req,res,next) => {
+    console.log(err);
+    res.status(err.status || 500).send(err.message || `Unknown error`);
+    next();
+})
+
+
 const server = app.listen(4417, () => {
     console.log(`Server started succesfully on port ${server.address().port}`);
 })
 
 
-
-
-// getting files
-// router.get("/getAllDucks", (req,res) => duckModel.find({})
-// .then(results => res.send(results))
-// .catch(err => nextTick(err)));
-
-// create
-// duckModel.create(req.body)
-// .then(results => res.status(201).send(results))
-// .catch(err => nextTick(err)));

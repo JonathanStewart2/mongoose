@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost:27017/movies_db',
 //and actors.
 
 const actorSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+    //_id: Schema.Types.ObjectId,
     name: {
         type: String,
         require: true,
@@ -43,7 +43,7 @@ const reviewSchema = new Schema({
 
 
 const movieSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+    //_id: Schema.Types.ObjectId,
     title: {
         type: String,
         require: true,

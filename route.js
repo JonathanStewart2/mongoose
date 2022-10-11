@@ -17,8 +17,6 @@ router.get('/getAllActors', (req,res,next) => actorModel.find()
 .catch(err => next(err))
 );
 
-
-
 router.get('/findMovie/:id', (req,res,next) => {
     const id = req.params.id;
     movieModel.find({id})
@@ -34,55 +32,76 @@ router.get('/findActor/:id', (req,res,next) => {
 })
 
 router.post('/addMovie', (req,res,next) => {
-    //if (!req.body.title) return next({ status: 400, message: "Invalid body"});
-    movieModel.init();
-    const movie = new movieModel({
-        title: req.body.title,
-        description: req.body.description,
-        releaseDate: req.body.releaseDate,
-        actors: req.body.actors     
-        })
-        movie.save().then((data)=>{
-            console.log('save data: ',data)
-        })
-    // movieModel.create(req.body)
-    // .then(results => res.status(201).send(results))
-    // .catch(err => next(err))
+    movieModel.create(req.body)
+    .then(results => res.status(201).send(results))
+    .catch(err => next(err))
 });
 
 router.post('/addActor', (req,res,next) => {
-    //if (!req.body.name) return next({ status: 400, message: "Invalid body"});
-    console.log(req.body.name);
     actorModel.create(req.body)
     .then(results => res.status(201).send(results))
     .catch(err => next(err))
 });
-    
 
-
-// TO BE CHANGED
-
-
-
-router.delete('/delete/:id', (req, res) => {
+router.delete('/deleteActor/:id', (req, res, next) => {
     const id = req.params.id;
-    console.log(`Deleting pokemon with ID: ${id}`);
-    let removed = pokemon.splice(id, 1);
-    console.log(`Remaining Pokemon: ${pokemon}`);
-    res.send(`${removed} was deleted!`);
+    actorModel.findByIdAndDelete(id)
+    .then(results => res.status(201).send(results))
+    .catch(err => next(err))
 })
 
-
-
-router.put('/replace/:id', (req, res) => {
+router.delete('/deleteMovie/:id', (req, res, next) => {
     const id = req.params.id;
-    const name = req.query.name;
-    console.log(id, name);
-    pokemon[id] = name;
-    console.log(`${name} added to Pokemon.`);
-    console.log(pokemon);
-    res.send(pokemon)
+    actorMovie.findByIdAndDelete(id)
+    .then(results => res.status(201).send(results))
+    .catch(err => next(err))
 })
+
+router.patch("/updateActor/:id", async (req,res,next) => {
+    try {
+        await actorModel.findByIdAndUpdate(req.params.id, req.body)
+        const newModel = await actorModel.findById(req.params.id);
+        console.log(newModel);
+        res.send(newModel);
+    } catch(err) {
+        return next(err);
+    }
+})
+
+// doesnt work as havent set _id to objectId
+router.patch("/updateMovies/:id", async (req,res,next) => {
+    try {
+        await movieModel.findByIdAndUpdate(req.params.id, req.body)
+        const newModel = await movieModel.findById(req.params.id);
+        console.log(newModel);
+        res.send(newModel);
+    } catch(err) {
+        return next(err);
+    }
+})
+//63453411f92b3fd99e6b80c5 - review ID
+// 634525137fe3e3a4959def8b -inception ID
+
+router.post("/createReview", async (req,res,next) => {
+    try { 
+        const result = await reviewModel.create(req.body);
+        res.status(201).send(result);
+    } catch(err) {  
+        return next(err);
+    }   
+})
+
+//TODO: GET ASYNC WORKING
+// router.patch("/updateActor/:id", async (req,res,next) => {
+//     try {
+//         await actorModel.findByIdAndUpdate(req.params.id, req.query)
+//         const newModel = await actorModel.findById(req.params.id);
+//         console.log(newModel);
+//         res.send(newModel);
+//     } catch(err) {
+//         return next(err);
+//     }
+// })
 
 
 module.exports = router;
