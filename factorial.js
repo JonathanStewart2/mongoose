@@ -20,17 +20,17 @@ const factorial = (n) => {
 
 module.exports = factorial;
 
-const recursiveFactorial = (n, s) => {
-    if (n%2 !== 0){
-        return "None"
-    } else if (n == 1){
-        return s
-    } else {
-        console.log(n, s);
-        n = n/s
-        s += 1
-        return recursiveFactorial(n, s)
-    }
-}
+// const recursiveFactorial = (n, s) => {
+//     if (n%2 !== 0){
+//         return "None"
+//     } else if (n == 1){
+//         return s
+//     } else {
+//         console.log(n, s);
+//         n = n/s
+//         s += 1
+//         return recursiveFactorial(n, s)
+//     }
+// }
 
-console.log(`120 is ${recursiveFactorial(120,2)}`);
+// console.log(`120 is ${recursiveFactorial(120,2)}`);

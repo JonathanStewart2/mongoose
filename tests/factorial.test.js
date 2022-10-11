@@ -15,7 +15,7 @@ describe("Factorial Testing", () => {         // set of tests
     it("should result in None", () => {
         expect(factFunct(1234)).to.equal("None");
     })
-    it("should result in None", () => {
+    it("should result in 21", () => {
         expect(factFunct(51090942171709440000)).to.equal(21);
     })
     it("should result in None", () => {
