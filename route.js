@@ -51,7 +51,7 @@ router.delete('/deleteActor/:id', (req, res, next) => {
 
 router.delete('/deleteMovie/:id', (req, res, next) => {
     const id = req.params.id;
-    actorMovie.findByIdAndDelete(id)
+    movieModel.findByIdAndDelete(id)
     .then(results => res.status(201).send(results))
     .catch(err => next(err))
 })
