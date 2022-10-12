@@ -1,13 +1,19 @@
-// 'use strict';
+'use strict';
 
-// const chai = require("chai");
-// const chaiHttp = require("chai-http");
-// chai.use(chaiHttp);
-// const app = require('./server');
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+chai.use(chaiHttp);
+const server = require("../index");
 
-// chai.request(app)  .get('/');
-// chai.request(app).get('/getAllActors');
-// chai.request(app).get('/getAllMovies');
+describe("Actor/Movie Route Testing", () => {
+    it("should create an actor", () =>{
+        const newActor = { "name": "Liam Neeson"};
+        chai.request(server).post("/addActor").send(newActor).end((err,res) => {
+            chai.expect(err).to.be.null;
+            chai.expect(res.status).to.equal(201);
+            chai.expect(res.body).to.include(newActor)
+        })
+    })
+})
 
-// chai.request(app).get(`/findMovie/634525137fe3e3a4959def8b`);
 

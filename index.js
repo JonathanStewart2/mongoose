@@ -31,3 +31,4 @@ const server = app.listen(4417, () => {
 })
 
 
+module.exports = server;
